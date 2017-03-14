@@ -44,10 +44,16 @@ class User extends BaseUser
      */
     private $updatedAt;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Proyecto", mappedBy="creador")
+     */
+    private $proyectosCreados;
+
     public function __construct()
     {
         parent::__construct();
 
+        $this->proyectosCreados = new ArrayCollection();
         $this->createdAt    = new \DateTime();
         $this->updatedAt    = $this->createdAt;
     }
@@ -94,4 +100,21 @@ class User extends BaseUser
     {
         return $this->username;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getProyectosCreados()
+    {
+        return $this->proyectosCreados;
+    }
+
+    /**
+     * @param mixed $proyectosCreados
+     */
+    public function setProyectosCreados($proyectosCreados)
+    {
+        $this->proyectosCreados = $proyectosCreados;
+    }
+
 }

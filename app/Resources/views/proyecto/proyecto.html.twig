@@ -1,0 +1,27 @@
+
+{% extends '::base.html.twig' %}
+
+{% block headTitle %}{{ proyecto.nombre }}{% endblock %}
+
+{% block body %}
+    <div class="proyecto">
+    ID : {{ proyecto.id }}
+    <br/>
+    Nombre: {{ proyecto.nombre }}
+    <br/>
+    Descripcion: {{ proyecto.descripcion }}
+    <br/>
+    Categoria: {{ proyecto.categoria }}
+    <br/>
+        Creador:  <a href="{{ path('app_usuario_show', {'slug': proyecto.creador.id }) }}">{{ proyecto.creador }}</a>
+    <br/>
+    Creado el dia: {{ proyecto.createdAt | date("d/m/Y H:i:s") }}
+    <br/>
+    Actualizado el dia: {{ proyecto.updatedAt | date("d/m/Y H:i:s") }}
+    </div>
+    <div class="boton-detalles">
+        <a href="{{ path('app_index_index') }}"><button class="btn btn-primary" > ↪️️ Volver</button></a>
+    </div>
+
+
+{% endblock %}

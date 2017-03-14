@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+
+{% block headTitle %}{{ usuario.username }}{% endblock %}
+
+{% block body %}
+    <div class="boton-detalles">
+        <a href="{{ path('app_index_index') }}"><button class="btn btn-primary" > ↪️️ Volver</button></a>
+    </div>
+    <div>
+        <h1>Perfil de {{ usuario.username }}</h1>
+        <div class="profile-bio" style="margin-bottom:30px">
+            <div class="row">
+                <div class="col-md-5 col-md-offset-0">
+                    <img class="round img-responsive md-margin-bottom-10" src="{{ asset('images/jaguar.jpg') }}" alt="perfil">
+
+                </div>
+                <div class="col-md-7">
+                    <h2>{{ usuario.username }}</h2>
+                    <span><strong>E-mail:</strong> {{ usuario.email }}</span>
+                    <span><strong>Creado el dia:</strong> {{ usuario.createdAt | date("d/m/Y H:i:s") }}</span>
+                    <hr>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget massa nec turpis congue bibendum. Integer nulla felis, porta suscipit nulla et, dignissim commodo nunc. Morbi a semper nulla.</p>
+                    <p>Proin mauris odio, pharetra quis ligula non, vulputate vehicula quam. Nunc in libero vitae nunc ultricies tincidunt ut sed leo. Sed luctus dui ut congue consequat. Cras consequat nisl ante, nec malesuada velit pellentesque ac. Pellentesque nec arcu in ipsum iaculis convallis.</p>
+                </div>
+            </div>
+        </div>
+        <h1 style="padding-top:30px;margin-bottom: 100px;">Proyectos creados por {{ usuario.username }}</h1>
+        <div class="profile-body">
+        {% for proyecto in usuario.proyectosCreados %}
+            <div class="col-sm-6 profile-body" style="min-height: 523px">
+                <div class="easy-block-v1">
+                    <img class="img-responsive" src="{{ asset('images/busy.jpg') }}" alt="">
+                    <div class="easy-block-v1-badge rgba-red">{{ proyecto.categoria }}</div>
+                </div>
+                <div class="projects">
+                    <h2><a class="color-dark" href="{{ path('app_index_show', {'slug': proyecto.id}) }}">{{ proyecto.nombre }}</a></h2>
+                    <ul class="list-unstyled list-inline blog-info-v2">
+                        <li>By: <a class="color-green" href="{{ path('app_index_show', {'slug': proyecto.id}) }}">{{ proyecto.creador }}</a></li>
+                        <li><i class="fa fa-clock-o"></i> {{ proyecto.createdAt| date("d/m/Y H:i:s") }}</li>
+                    </ul>
+                    <p>{{ proyecto.descripcion }}</p>
+                    <br>
+
+
+                </div>
+
+            </div>
+
+        {% endfor %}
+        </div>
+
+    </div>
+
+
+
+{% endblock %}

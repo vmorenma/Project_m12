@@ -1,5 +1,41 @@
 {% extends '::base.html.twig' %}
 
 {% block body %}
-    <h1>New Project Created</h1>
+    <h1 style=" margin-bottom: 50px" >Mis proyectos</h1>
+    <div
+            class="contenedor-proyecto container col-lg-12 col-md-12 col-sm-12 col-xs-12"
+            style="background-color: #7c8ea3; padding: 10px;"
+    >
+        <div class="profile-body">
+            {% for proyecto in proyectos %}
+                <div
+                        class="col-sm-6 profile-body "
+                        style="background-color: white; padding:10px; border:1px solid black; min-height: 523px;"
+
+                >
+                    <div class="easy-block-v1">
+                        <img class="img-responsive" src="{{ asset('images/busy.jpg') }}" alt="">
+                        <div class="easy-block-v1-badge rgba-red">{{ proyecto.categoria }}</div>
+                    </div>
+                    <div class="projects">
+                        <h2><a class="color-dark" href="{{ path('app_index_show', {'slug': proyecto.id}) }}">{{ proyecto.nombre }}</a></h2>
+                        <ul class="list-unstyled list-inline blog-info-v2">
+                            <li>By: <a class="color-green" href="{{ path('app_usuario_show', {'slug': proyecto.creador.id }) }}">{{ proyecto.creador }}</a></li>
+                            <li><i class="fa fa-clock-o"></i> {{ proyecto.createdAt| date("d/m/Y H:i:s") }}</li>
+                        </ul>
+                        <p>{{ proyecto.descripcion }}</p>
+                        <br>
+
+                    </div>
+
+                </div>
+
+            {% endfor %}
+        </div>
+
+    </div>
+    <br/>
+
+    <a href= "{{ path('app_index_nuevoProyecto') }}" class="btn btn-primary">Nuevo Proyecto</a>
+
 {% endblock %}

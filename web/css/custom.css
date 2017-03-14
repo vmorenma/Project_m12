@@ -19,3 +19,337 @@
 .margin-bottom-lg {
     margin-bottom: 30px;
 }
+
+.top-navbar{
+    z-index:3;
+}
+
+.proyecto{
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-left:7%;
+    padding:15px;
+    margin-bottom:7%;
+}
+
+.contenedor-proyecto{
+    margin-bottom: 100px;
+    background-color: #7c8ea3;
+    padding: 10px;
+
+}
+
+.details{
+    position:relative;
+    top: 90px;
+}
+.boton-detalles{
+    margin-left: 8%;
+}
+
+/*Easy Block (used for image badges)
+------------------------------------*/
+.easy-block-v1 {
+    position: relative;
+}
+
+.easy-block-v1 img {
+    width: 100%;
+}
+
+.easy-block-v1 .overflow-h h3 {
+    width: 60%;
+    float: left;
+    font-size: 18px;
+    line-height: 24px;
+    margin-bottom: 5px;
+}
+
+.easy-block-v1 .easy-block-v1-badge {
+    left: 0px;
+    top: 10px;
+    z-index: 1;
+    color: #fff;
+    padding: 4px 10px;
+    position: absolute;
+    background-color:red;
+}
+
+/*Project Details*/
+.project-details li {
+    color: #555;
+    font-weight: 200;
+    margin-bottom: 5px;
+}
+
+.project-details strong {
+    min-width: 100px;
+    display: inline-block;
+}
+
+.project-details a {
+    text-decoration: underline;
+}
+/*Profile Projects
+------------------------------------*/
+.profile .projects {
+    background: #fff;
+    padding: 20px 20px 10px;
+}
+
+.profile .projects h2 {
+    margin: 0 0 5px;
+    font-size: 22px;
+    font-weight: 200;
+}
+
+.profile .projects h3 {
+    margin-bottom: 5px;
+}
+
+.profile .projects .progress {
+    margin-bottom: 15px;
+}
+
+.profile .blog-info-v2 {
+    margin-left: 0;
+    margin-bottom: 15px;
+}
+
+.profile .blog-info-v2 li {
+    font-size: 12px;
+    padding-left: 8px;
+    line-height: 12px;
+    border-left: 1px solid #eee;
+}
+
+.profile .blog-info-v2 li:first-child {
+    padding-left: 0;
+    border-left: none;
+}
+
+.profile .blog-info-v2 li i {
+    margin-right: 3px;
+}
+
+.profile .project-share {
+    overflow: hidden;
+    background: #fff;
+    padding: 10px 20px;
+    border-top: 1px solid #eee;
+}
+
+.profile .project-share ul {
+    margin-left: 0;
+    margin-bottom: 0;
+}
+
+.profile .comment-list-v2 li {
+    color: #999;
+    font-size: 14px;
+    padding: 0 10px 0 0;
+}
+
+.profile .comment-list-v2 li a {
+    color: #555;
+}
+
+.profile .comment-list-v2 li i {
+    margin-right: 3px;
+}
+
+.profile .comment-list-v2 li a:hover {
+    color: #555;
+    text-decoration: none;
+}
+
+.profile .comment-list-v2 li:hover i {
+    color: #72c02c;
+}
+
+.profile .star-vote li {
+    padding: 0;
+    font-size: 15px;
+}
+
+/**
+Profile Body
+ */
+/*Profile
+------------------------------------*/
+.profile .list-group i {
+    min-width: 20px;
+    margin-right: 5px;
+    text-align: center;
+}
+
+.profile .heading-sm-v2 {
+    font-size: 16px;
+}
+
+.profile .profile-body {
+    padding: 20px;
+    background: #f7f7f7;
+    border: 1px black;
+    min-height: 400px;
+    margin-bottom:10px;
+
+}
+
+/*Scrollbar*/
+.mCustomScrollbar {
+    height: 320px;
+}
+
+/*Panel Title Box*/
+.profile .panel-profile {
+    border: none;
+    margin-bottom: 0;
+    box-shadow: none;
+}
+.profile .panel-profile.no-bg {
+    background: inherit;
+}
+
+.profile .panel-heading {
+    color: #585f69;
+    background: #fff;
+    padding: 7px 15px;
+    border-bottom: solid 3px #f7f7f7;
+}
+
+.profile .panel-heading-v2.overflow-h i.pull-right,
+.profile .panel-heading.overflow-h i.pull-right {
+    top: 7px;
+    position: relative;
+}
+
+.profile .panel-heading-v2.overflow-h i.pull-right,
+.profile .panel-heading.overflow-h a i {
+    color: #777;
+}
+
+.profile .panel-heading-v2.overflow-h i.pull-right,
+.profile .panel-heading.overflow-h a:hover i {
+    color: #555;
+}
+
+.profile .panel-title {
+    font-size: 16px;
+}
+
+/*Notification*/
+.profile .notification {
+    overflow: hidden;
+    margin-bottom: 10px;
+    padding: 15px 15px 0 0;
+    border-top: 1px solid #eee;
+}
+
+.profile .notification:first-child {
+    border-top: none;
+}
+
+.profile .notification img,
+.profile .notification i {
+    float: left;
+    margin-right: 10px;
+}
+
+.profile .notification img {
+    width: 35px;
+    height: 35px;
+}
+
+.profile .notification span {
+    color: #777;
+    display: block;
+}
+
+.profile .notification small {
+    color: #999;
+    font-size: 11px;
+}
+
+.profile .notification h4 {
+    margin: 0 0 3px;
+    font-size: 14px;
+}
+
+.profile .notification p {
+    color: #777;
+    font-size: 12px;
+}
+
+/*Profile Post*/
+.profile .profile-post {
+    background: #fff;
+    margin-bottom: 2px;
+    padding: 7px 7px 7px 0;
+}
+
+.profile .profile-post.color-one {
+    border-left: 2px solid #72c02c;
+}
+.profile .profile-post.color-two {
+    border-left: 2px solid #3498db;
+}
+.profile .profile-post.color-three {
+    border-left: 2px solid #e74c3c;
+}
+.profile .profile-post.color-four {
+    border-left: 2px solid #9b6bcc;
+}
+.profile .profile-post.color-five {
+    border-left: 2px solid #555;
+}
+.profile .profile-post.color-six {
+    border-left: 2px solid #f1c40f;
+}
+.profile .profile-post.color-seven {
+    border-left: 2px solid #27d7e7;
+}
+
+.profile .profile-post span.profile-post-numb {
+    float: left;
+    color: #999;
+    font-size: 20px;
+    font-weight: 200;
+    padding: 5px 12px;
+}
+
+.profile .profile-post:hover span.profile-post-numb {
+    color: #72c02c;
+}
+
+.profile .profile-post-in {
+    overflow: hidden;
+}
+
+.profile .profile-post-in h3 a {
+    color: #555;
+    text-transform: uppercase;
+}
+
+.profile .profile-post-in p {
+    color: #999;
+    margin-bottom: 5px;
+}
+
+.profile .profile-bio {
+    background: #fff;
+    position: relative;
+    padding: 15px 10px 5px 15px;
+}
+
+.round{
+    border-radius: 150px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+    height: 200px;
+    width: 200px;
+    margin-top:32px;
+    margin-left:88px;
+
+}
+
+

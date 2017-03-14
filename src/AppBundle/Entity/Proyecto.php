@@ -57,10 +57,17 @@ class Proyecto
     private $updatedAt;
 
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Trascastro\UserBundle\Entity\User", inversedBy="proyectosCreados")
+     */
+    private $creador;
+
+
     public function __construct()
     {
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
+
     }
 
     /**
@@ -155,7 +162,6 @@ class Proyecto
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
-
         return $this;
     }
 
@@ -192,5 +198,22 @@ class Proyecto
     {
         return $this->updatedAt;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCreador()
+    {
+        return $this->creador;
+    }
+
+    /**
+     * @param mixed $creador
+     */
+    public function setCreador($creador)
+    {
+        $this->creador = $creador;
+    }
+
 }
 
