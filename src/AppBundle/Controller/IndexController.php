@@ -7,10 +7,8 @@ use AppBundle\Entity\Proyecto;
 use AppBundle\Form\ImageType;
 use AppBundle\Form\ProyectoType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Form\Form;
 
 class IndexController extends Controller
 {
@@ -107,7 +105,7 @@ class IndexController extends Controller
         return $this->render(':index:form.html.twig',
             [
                 'form'  =>  $form->createView(),
-                'action'=>  $this->generateUrl('donuevoProyectoAction')
+                'action'=>  $this->generateUrl('app_index_donuevoProyecto')
             ]
         );
     }
@@ -115,7 +113,7 @@ class IndexController extends Controller
      * @Route("/remove/{id}", name="app_index_remove")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function removeAction($id, Request $request)
+    public function removeAction($id)
     {
         $m= $this->getDoctrine()->getManager();
         $repo= $m->getRepository('AppBundle:Proyecto');
@@ -132,7 +130,7 @@ class IndexController extends Controller
     /**
      * @Route("/{slug}.html", name="app_index_show")
      */
-    public function showAction($slug, Request $request)
+    public function showAction($slug)
     {
         $m = $this->getDoctrine()->getManager();
         $repository= $m->getRepository('AppBundle:Proyecto');
@@ -146,7 +144,7 @@ class IndexController extends Controller
      * @Route("/usuario/{slug}.html", name="app_usuario_show")
      *
      */
-    public function showUserAction($slug, Request $request)
+    public function showUserAction($slug)
     {
         $m = $this ->getDoctrine()->getManager();
         $repository= $m->getRepository('UserBundle:User');
