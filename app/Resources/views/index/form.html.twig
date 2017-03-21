@@ -4,7 +4,6 @@
     <div>
         <form method="post" action="{{ action }}" novalidate="novalidate">
             <div>
-                {{ dump(form.vars.value) }}
                 <ul>
                     {% for error in form.vars.errors %}
                         <li>{{ error.message }}</li>
