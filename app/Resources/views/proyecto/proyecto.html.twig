@@ -21,6 +21,8 @@
     </div>
     <div class="boton-detalles">
         <a href="{{ path('app_index_index') }}"><button class="btn btn-primary" > ↪️️ Volver</button></a>
+        <a href="{{ path('app_index_remove',{'id': proyecto.id}) }}"><button class="btn btn-danger" > ✖️ Eliminar</button></a>
+        <a href="{{ path('app_index_update',{'id': proyecto.id}) }}"><button class="btn btn-default" > ✏️️ Editar</button></a>
     </div>
 
 

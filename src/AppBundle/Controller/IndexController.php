@@ -86,6 +86,7 @@ class IndexController extends Controller
         }
 
         // set creator in our object
+        //is granted
         $user = $this->get('security.token_storage')->getToken()->getUser();
         $p->setCreador($user);
 
@@ -124,8 +125,57 @@ class IndexController extends Controller
         return $this->redirectToRoute('app_index_index');
     }
 
+    /**
+     * @Route("/update/{id}", name="app_index_update")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function updateAction($id)
+    {
+        $m=$this->getDoctrine()->getManager();
+        $repo=$m->getRepository('AppBundle:Proyecto');
+        $proyecto=$repo->find($id);
+        $form=$this->createForm(ProyectoType::class,$proyecto);
+        return $this->render(':index:form.html.twig',
+            [
+                'form'=>$form->createView(),
+                'action'=>$this->generateUrl('app_index_doUpdate',['id'=>$id])
+            ]
+        );
+    }
 
+    /**
+     * @Route("/doUpdate/{id}", name="app_index_doUpdate")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
 
+    public function doUpdateAction($id,Request $request)
+    {
+        $m= $this->getDoctrine()->getManager();
+        $repo= $m->getRepository('AppBundle:Proyecto');
+        $p1= $repo->find($id);
+        $form=$this->createForm(ProyectoType::class,$p1);
+
+        //El producto es actualizado con los estos datos
+        $form->handleRequest($request);
+        $p1->setUpdatedAt();
+
+        if($form->isValid()){
+            $m->flush();
+            $this->addFlash('messages','Proyecto Updated');
+
+            return $this->redirectToRoute('app_index_index');
+        }
+
+        $this->addFlash('message' , 'Review your form');
+        return $this->render(':index:form.html.twig',
+            [
+                'form'=> $form->createView(),
+                'action'=> $this->generateUrl('app_index_doUpdate',['id'=>$id]),
+            ]
+
+        );
+
+    }
 
     /**
      * @Route("/{slug}.html", name="app_index_show")
