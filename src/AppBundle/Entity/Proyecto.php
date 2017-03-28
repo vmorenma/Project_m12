@@ -64,7 +64,7 @@ class Proyecto
     private $creador;
 
     /**
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comentario", mappedBy="proyecto")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comentario", mappedBy="proyecto", cascade={"remove"})
      */
     private $comentarios;
 
