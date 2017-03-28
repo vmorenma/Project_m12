@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Proyecto
@@ -62,9 +63,15 @@ class Proyecto
      */
     private $creador;
 
+    /**
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comentario", mappedBy="proyecto")
+     */
+    private $comentarios;
+
 
     public function __construct()
     {
+        $this->comentarios = new ArrayCollection();
         $this->createdAt = new \DateTime();
         $this->updatedAt = $this->createdAt;
 
@@ -215,5 +222,38 @@ class Proyecto
         $this->creador = $creador;
     }
 
-}
 
+    /**
+     * Add comentario
+     *
+     * @param \AppBundle\Entity\Comentario $comentario
+     *
+     * @return Proyecto
+     */
+    public function addComentario(\AppBundle\Entity\Comentario $comentario)
+    {
+        $this->comentarios[] = $comentario;
+
+        return $this;
+    }
+
+    /**
+     * Remove comentario
+     *
+     * @param \AppBundle\Entity\Comentario $comentario
+     */
+    public function removeComentario(\AppBundle\Entity\Comentario $comentario)
+    {
+        $this->comentarios->removeElement($comentario);
+    }
+
+    /**
+     * Get comentarios
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getComentarios()
+    {
+        return $this->comentarios;
+    }
+}

@@ -4,6 +4,8 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Image;
 use AppBundle\Entity\Proyecto;
+use AppBundle\Entity\Comentario;
+use AppBundle\Form\ComentarioType;
 use AppBundle\Form\ImageType;
 use AppBundle\Form\ProyectoType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -53,6 +55,52 @@ class IndexController extends Controller
             'form' => $form->createView(),
         ]);
     }
+    /**
+     * @Route("/nuevoComentario/{id}", name="app_index_nuevoComentario")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+
+    public function nuevoComentarioAction($id, Request $request)
+    {
+        $c = new Comentario();
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $form = $this->createForm(ComentarioType::class, $c);
+
+        if ($request->getMethod() == Request::METHOD_POST) {
+            $form->handleRequest($request);
+
+            if ($form->isValid()) {
+                $m = $this->getDoctrine()->getManager();
+                $repo=$m->getRepository('AppBundle:Proyecto');
+                $proyecto=$repo->find($id);
+                $user = $this->get('security.token_storage')->getToken()->getUser();
+                $c->setCreador($user);
+                $c->setProyecto($proyecto);
+                $m->persist($c);
+                $m->flush();
+
+                return $this->redirectToRoute('app_index_show',['slug'=>$id]);
+            }
+        }
+
+        return $this->render(':index:comentar.html.twig', [
+            'form' => $form->createView(),
+        ]);
+        /*$c= new Comentario();
+        $form = $this->createForm(ComentarioType::class, $c);
+
+        return $this->render(':index:comentar.html.twig',
+            [
+                'form' =>   $form->createView(),
+                'action'=>  $this->generateUrl('app_index_donuevoComentario',['id'=>$id])
+            ]
+        );*/
+    }
+
+
 
     /**
      * @Route("/nuevoProyecto", name="app_index_nuevoProyecto")
@@ -116,6 +164,9 @@ class IndexController extends Controller
      */
     public function removeAction($id)
     {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
         $m= $this->getDoctrine()->getManager();
         $repo= $m->getRepository('AppBundle:Proyecto');
         $proyecto = $repo->find($id);
@@ -131,6 +182,10 @@ class IndexController extends Controller
      */
     public function updateAction($id)
     {
+
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
         $m=$this->getDoctrine()->getManager();
         $repo=$m->getRepository('AppBundle:Proyecto');
         $proyecto=$repo->find($id);

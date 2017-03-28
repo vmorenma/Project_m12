@@ -5,6 +5,13 @@
 
 {% block body %}
     <div class="proyecto">
+        <div class="boton-detalles">
+            <a href="{{ path('app_index_index') }}"><button class="btn btn-primary" > ↪️️ Volver</button></a>
+            {% if (app.user == proyecto.creador) or (app.user == "victor-test") %}
+            <a href="{{ path('app_index_remove',{'id': proyecto.id}) }}"><button class="btn btn-danger" > ✖️ Eliminar</button></a>
+            <a href="{{ path('app_index_update',{'id': proyecto.id}) }}"><button class="btn btn-default" > ✏️️ Editar</button></a>
+            {% endif %}
+        </div>
     ID : {{ proyecto.id }}
     <br/>
     Nombre: {{ proyecto.nombre }}
@@ -18,12 +25,29 @@
     Creado el dia: {{ proyecto.createdAt | date("d/m/Y H:i:s") }}
     <br/>
     Actualizado el dia: {{ proyecto.updatedAt | date("d/m/Y H:i:s") }}
+    <br>
+    <h3>Comentarios</h3>
+    <br>
+    {% for comentario in proyecto.comentarios %}
+    <div class="media">
+        <div class="media-left">
+            <a href="#">
+                <img class="media-object" height="50px" width="50px" src="{{ asset('images/jaguar.jpg') }}" alt="usuario">
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading"> <a href="{{ path('app_usuario_show', {'slug': comentario.creador.id }) }}">{{ comentario.creador.username }}</a></h4>
+            <p> {{ comentario.texto }} </p>
+        </div>
     </div>
-    <div class="boton-detalles">
-        <a href="{{ path('app_index_index') }}"><button class="btn btn-primary" > ↪️️ Volver</button></a>
-        <a href="{{ path('app_index_remove',{'id': proyecto.id}) }}"><button class="btn btn-danger" > ✖️ Eliminar</button></a>
-        <a href="{{ path('app_index_update',{'id': proyecto.id}) }}"><button class="btn btn-default" > ✏️️ Editar</button></a>
+    {% endfor %}
+    <a href="{{ path('app_index_nuevoComentario',{'id': proyecto.id}) }}"><button class="btn btn-default" > ✏️️ Añadir Comentario</button></a>
+
+
     </div>
+
+
+
 
 
 {% endblock %}
