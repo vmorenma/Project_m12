@@ -167,9 +167,15 @@ class IndexController extends Controller
         if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             throw $this->createAccessDeniedException();
         }
+
         $m= $this->getDoctrine()->getManager();
         $repo= $m->getRepository('AppBundle:Proyecto');
         $proyecto = $repo->find($id);
+        $creator= $proyecto->getCreador().$id;
+        $current = $this->getUser().$id;
+        if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
+            throw $this->createAccessDeniedException();
+        }
         $m->remove($proyecto);
         $m->flush();
 
@@ -189,6 +195,13 @@ class IndexController extends Controller
         $m=$this->getDoctrine()->getManager();
         $repo=$m->getRepository('AppBundle:Proyecto');
         $proyecto=$repo->find($id);
+
+        $creator= $proyecto->getCreador().$id;
+        $current = $this->getUser().$id;
+        if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
+            throw $this->createAccessDeniedException();
+        }
+
         $form=$this->createForm(ProyectoType::class,$proyecto);
         return $this->render(':index:form.html.twig',
             [
@@ -205,6 +218,7 @@ class IndexController extends Controller
 
     public function doUpdateAction($id,Request $request)
     {
+
         $m= $this->getDoctrine()->getManager();
         $repo= $m->getRepository('AppBundle:Proyecto');
         $p1= $repo->find($id);
