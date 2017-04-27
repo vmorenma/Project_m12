@@ -133,7 +133,9 @@ class IndexController extends Controller
         $m= $this->getDoctrine()->getManager();
         $repo= $m->getRepository('AppBundle:Comentario');
         $comentario = $repo->find($id);
-        $creator= $comentario->getCreador().$id;
+        $creator= $comentario->getCreador()->getId();
+        $proyecto = $comentario->getProyecto();
+        $postid=$proyecto->getId();
         $current = $this->getUser().$id;
         if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
             throw $this->createAccessDeniedException();
@@ -141,7 +143,7 @@ class IndexController extends Controller
         $m->remove($comentario);
         $m->flush();
 
-        return $this->redirectToRoute('app_index_index');
+        return $this->redirectToRoute('app_index_show', array( "slug"=>$postid));
     }
 
     /**

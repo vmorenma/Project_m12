@@ -38,8 +38,9 @@
         <div class="media-body" >
             <h4 class="media-heading"> <a href="{{ path('app_usuario_show', {'slug': comentario.creador.id }) }}">{{ comentario.creador.username }}</a></h4>
             <p> {{ comentario.texto }} </p>
-
+            {% if (app.user == comentario.creador) or (app.user == "victor-test") %}
             <a style="float:right" href="{{ path('app_index_borrarComentario',{'id': comentario.id}) }}"><button class="btn btn-default" > ❌️️️ Borrar</button></a>
+            {% endif %}
         </div>
     </div>
     {% endfor %}
