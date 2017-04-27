@@ -133,7 +133,7 @@ class IndexController extends Controller
         $m= $this->getDoctrine()->getManager();
         $repo= $m->getRepository('AppBundle:Comentario');
         $comentario = $repo->find($id);
-        $creator= $comentario->getCreador()->getId();
+        $creator= $comentario->getCreador().$id;
         $proyecto = $comentario->getProyecto();
         $postid=$proyecto->getId();
         $current = $this->getUser().$id;
