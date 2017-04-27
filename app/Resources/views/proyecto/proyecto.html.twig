@@ -35,9 +35,11 @@
                 <img class="media-object" height="50px" width="50px" src="{{ asset('images/jaguar.jpg') }}" alt="usuario">
             </a>
         </div>
-        <div class="media-body">
+        <div class="media-body" >
             <h4 class="media-heading"> <a href="{{ path('app_usuario_show', {'slug': comentario.creador.id }) }}">{{ comentario.creador.username }}</a></h4>
             <p> {{ comentario.texto }} </p>
+
+            <a style="float:right" href="{{ path('app_index_borrarComentario',{'id': comentario.id}) }}"><button class="btn btn-default" > ❌️️️ Borrar</button></a>
         </div>
     </div>
     {% endfor %}

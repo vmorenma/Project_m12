@@ -121,6 +121,30 @@ class IndexController extends Controller
     }
 
     /**
+     * @Route("/borrarComentario/{id}", name="app_index_borrarComentario")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function borarComentarioAction($id)
+    {
+        if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $m= $this->getDoctrine()->getManager();
+        $repo= $m->getRepository('AppBundle:Comentario');
+        $comentario = $repo->find($id);
+        $creator= $comentario->getCreador().$id;
+        $current = $this->getUser().$id;
+        if (($current!=$creator)&&(!$this->get('security.authorization_checker')->isGranted('ROLE_SUPER_ADMIN'))) {
+            throw $this->createAccessDeniedException();
+        }
+        $m->remove($comentario);
+        $m->flush();
+
+        return $this->redirectToRoute('app_index_index');
+    }
+
+    /**
      * @Route("/donuevoProyecto", name="app_index_donuevoProyecto")
      * @return \Symfony\Component\HttpFoundation\Response
      */
